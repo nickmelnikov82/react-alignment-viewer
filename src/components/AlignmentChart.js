@@ -186,7 +186,6 @@ export default class AlignmentChart extends PureComponent {
 
         const x = _.range(length * count).map((i) => i % length);
         const y = _.range(length * count).map((i) => _.floor(i / length));
-        const text = _.flatten(sequencesArray);
 
         const hoverText = getHovertext(sequencesArray, sequencesInfo);
 
@@ -243,40 +242,18 @@ export default class AlignmentChart extends PureComponent {
                 type: 'heatmap',
                 name: 'Heatmap',
                 z: z,
-                hoverinfo: 'none',
                 colorscale: colorscale,
                 opacity: opacity,
                 showscale: false,
-            },
-            // Heatmap annotations
-            {
-                type: 'scattergl',
-                name: 'Text',
-                mode: 'text',
-                x: x,
-                y: y,
-                text: text,
-                hoverinfo: 'none',
+                text: sequencesArray,
+                texttemplate: "%{text}",
                 textfont: {
                     color: textcolor,
                     size: textsize
                 },
-            },
-            // Hoverinfo label (hacky)
-            {
-                type: 'scatter',
-                name: 'Annotations',
-                x: x,
-                y: y,
-                marker: {
-                    color: 'transparent'
-                },
-                text: hoverText,
-                hoverinfo: 'text+name',
-                textfont: {
-                    color: textcolor,
-                    size: textsize
-                },
+                customdata: hoverText,
+                hoverInfo: 'customdata+name'
+
             },
         ];
 

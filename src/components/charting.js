@@ -54,8 +54,8 @@ export const getHovertext = (sequencesArray, sequencesInfo) => {
         formattedTextsArray.push(formattedTexts);
     }
 
-    return _.flatten(formattedTextsArray);
-}
+    return formattedTextsArray;
+};
 
 
 // Get label and tick properties
